@@ -1,16 +1,16 @@
 // import resList from "../utils/mockData";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, {withPromotedLabel } from "./RestaurantCard";
 import { useState ,useEffect} from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 
-
-
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
   
   console.log("body is rendered")
   
@@ -21,13 +21,22 @@ const Body = () => {
   const fetchData = async () => {
     const data = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
+      
     );
     const json = await data.json();
 
     console.log(json);
     console.log("all okkkkkkk!!!!")
-    setListOfRestaurants(json?.data?.cards[2]?.data?.data?.cards);
-    setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    // setListOfRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    // setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    //! I AM CHANGING THIS BECAUSE SWIGGY API IS UPDATED
+    setListOfRestaurants(
+      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+     setFilteredRestaurants(
+       json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
+         ?.restaurants
+     );
   };
 
   //!using custom hook onlinestatus
@@ -43,15 +52,15 @@ const Body = () => {
     
     
     //using ternary operator
-  return listOfRestaurants.length === 0 ? (
+  return listOfRestaurants?.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="filter flex">
+        <div className="search m-4 p-4">
           <input
             type="text"
-            className="search-box"
+            className="border border-solid  border-black"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
@@ -59,6 +68,7 @@ const Body = () => {
           />
 
           <button
+            className="px-4 py-1 bg-green-100 m-4 rounded-lg"
             onClick={() => {
               //filter rest card and update ui
               // console.log(searchText);
@@ -70,34 +80,40 @@ const Body = () => {
             }}
           >
             Search
-            </button>
-            
+          </button>
         </div>
-        <button
-          className="filter-btn"
+        <div className=" m-4 p-4 flex items-center">
+          <button
+            className=" px-4 py-2 bg-gray-100 rounded-lg "
             onClick={() => {
               console.log("button click is working");
-            //!filter logic
+              //!filter logic
 
               const filteredList = listOfRestaurants.filter(
-            
-              (res) => res.data.avgRating > 4
+                // (res) => res.data?.avgRating > 4
+                (res) => res?.info?.avgRating > 4.2
               );
-               console.log(filteredList);
-              setListOfRestaurants(filteredList);
-              
-          }}
-        >
-          Top rated restaurant
-        </button>
-      </div>
-      <div className="res-container">
-        {filteredRestaurants.map((restaurant) => (
-          <Link
-            key={restaurant.data.id}
-            to={"/restaurant/" + restaurant.data.id}
+              console.log(filteredList);
+              setFilteredRestaurants(filteredList);
+            }}
           >
-            <RestaurantCard resData={restaurant} />
+            Top rated restaurant
+          </button>
+        </div>
+      </div>
+      <div className="res-container flex flex-wrap">
+        {filteredRestaurants?.map((restaurant) => (
+          <Link
+            // key={restaurant.data.id}
+            // to={"/restaurant/" + restaurant.data.id}
+            //!I AM CHANGING THIS BECAUSE SWIGGY API IS UPDATED
+            key={restaurant?.info.id}
+            to={"/restaurants/" + restaurant?.info.id}
+          >
+            restaurant.data.promoted ? (<RestaurantCardPromoted /> resData=
+            {restaurant?.info}):
+            (<RestaurantCard resData={restaurant?.info} />)
+            {/* <RestaurantCard resData={restaurant} /> */}
           </Link>
         ))}
       </div>
