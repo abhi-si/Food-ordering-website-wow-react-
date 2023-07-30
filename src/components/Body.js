@@ -20,8 +20,7 @@ const Body = () => {
   // console.log("hellloooooo");
   const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
-      
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0759837&lng=72.8776559&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
 
@@ -46,15 +45,18 @@ const Body = () => {
       Please check your internet connection</h1>);
 
  //!conditional rendering
-//   if (listOfRestaurants.length === 0) {
-//     return <Shimmer />;
-// }
+  if (listOfRestaurants?.length === 0) {
+    return <Shimmer />;
+    
+  }
+  
     
     
     //using ternary operator
-  return listOfRestaurants?.length === 0 ? (
-    <Shimmer />
-  ) : (
+  // return listOfRestaurants?.length === 0 ? (
+  //   <Shimmer />
+  // ) : (
+  return(
     <div className="body">
       <div className="filter flex">
         <div className="search m-4 p-4">
@@ -110,10 +112,9 @@ const Body = () => {
             key={restaurant?.info.id}
             to={"/restaurants/" + restaurant?.info.id}
           >
-            restaurant.data.promoted ? (<RestaurantCardPromoted /> resData=
-            {restaurant?.info}):
-            (<RestaurantCard resData={restaurant?.info} />)
+            
             {/* <RestaurantCard resData={restaurant} /> */}
+            <RestaurantCard resData={restaurant?.info} />
           </Link>
         ))}
       </div>

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 
 const RestaurantMenu = () => {
+  console.log("hi");
   
   const { resId } = useParams();
   //!creating our own custom hook

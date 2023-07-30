@@ -9,7 +9,9 @@ const RestaurantCard = (props) => {
     deliveryTime,
     costForTwo,
     cuisines,
+    locality,
     sla,
+    
     
   } = resData;
   //!here i change = resData?.data; to resData; as swiggy api updated
@@ -24,8 +26,9 @@ const RestaurantCard = (props) => {
       <h3 className="font-bold py-2 text-lg">{name}</h3>
       <h4 className="flex-wrap ">{cuisines.join(",")}</h4>
       <h4>{avgRating}</h4>
-      <h4>{deliveryTime}</h4>
-      <h4>{costForTwo / 100}</h4>
+      <h4>{sla.deliveryTime} mins</h4>
+      <h4>{costForTwo}</h4>
+      <h4>{locality }</h4>
     </div>
   );
 };
