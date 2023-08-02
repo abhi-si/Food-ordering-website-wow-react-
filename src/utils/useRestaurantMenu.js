@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect, useState } from 'react';
 import { MENU_API } from "../utils/constant";
 
 //!this is our 1st custom hook

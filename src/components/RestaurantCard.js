@@ -6,7 +6,6 @@ const RestaurantCard = (props) => {
     cloudinaryImageId,
     name,
     avgRating,
-    deliveryTime,
     costForTwo,
     cuisines,
     locality,
@@ -24,7 +23,7 @@ const RestaurantCard = (props) => {
         src={CDN_URL + cloudinaryImageId}
       ></img>
       <h3 className="font-bold py-2 text-lg">{name}</h3>
-      <h4 className="flex-wrap ">{cuisines.join(",")}</h4>
+      <h4 className="flex-auto ">{cuisines.join(",")}</h4>
       <h4>{avgRating}</h4>
       <h4>{sla.deliveryTime} mins</h4>
       <h4>{costForTwo}</h4>
@@ -33,14 +32,14 @@ const RestaurantCard = (props) => {
   );
 };
 
-//higher order function
+//!higher order component it is use to enhance the component by adding extra feature without changing the original component
 
 export const withPromotedLabel = (RestaurantCard) => {
-  return () => {
+  return (props) => {
     return (
       <div>
-        <label>Promoted</label>
-        <RestaurantCard />
+        <label className="absolute bg-black text-white m-2 p-2 rounded-lg">Promoted</label>
+        <RestaurantCard {...props} />
       </div>
     );
   };

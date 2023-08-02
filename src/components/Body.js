@@ -11,6 +11,7 @@ const Body = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
   const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
+  //!higher order component
   
   console.log("body is rendered")
   
@@ -56,13 +57,13 @@ const Body = () => {
   // return listOfRestaurants?.length === 0 ? (
   //   <Shimmer />
   // ) : (
-  return(
+  return (
     <div className="body">
-      <div className="filter flex">
+      <div className="filter flex ">
         <div className="search m-4 p-4">
           <input
             type="text"
-            className="border border-solid  border-black"
+            className="border  border-black "
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
@@ -70,12 +71,14 @@ const Body = () => {
           />
 
           <button
-            className="px-4 py-1 bg-green-100 m-4 rounded-lg"
+            className="px-4 py-1 bg-green-100 m-4 rounded-lg hover:bg-sky-300"
             onClick={() => {
               //filter rest card and update ui
               // console.log(searchText);
               const filteredRestaurant = listOfRestaurants.filter((res) =>
-                res.data.name.toLowerCase().includes(searchText.toLowerCase())
+                res?.data?.name
+                  ?.toLowerCase()
+                  ?.includes(searchText.toLowerCase())
               );
 
               setFilteredRestaurants(filteredRestaurant);
@@ -86,7 +89,7 @@ const Body = () => {
         </div>
         <div className=" m-4 p-4 flex items-center">
           <button
-            className=" px-4 py-2 bg-gray-100 rounded-lg "
+            className=" px-4 py-2 bg-gray-100 rounded-lg hover:bg-sky-300"
             onClick={() => {
               console.log("button click is working");
               //!filter logic
@@ -113,8 +116,10 @@ const Body = () => {
             to={"/restaurants/" + restaurant?.info.id}
           >
             
-            {/* <RestaurantCard resData={restaurant} /> */}
-            <RestaurantCard resData={restaurant?.info} />
+            {restaurant?.data?.promoted ? (
+              <RestaurantCardPromoted resData={restaurant?.info} />) : (
+              <RestaurantCard resData={restaurant?.info} />
+            )}
           </Link>
         ))}
       </div>

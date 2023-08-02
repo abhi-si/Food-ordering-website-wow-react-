@@ -22,13 +22,13 @@ export const Header = () => {
           <li className="px-6 ">
             <Link to="/">Home</Link>
           </li>
-          <li className="px-6  flex">
+          <li className="px-6 ">
             <Link to="/about">About us</Link>
           </li>
-          <li className="px-6  flex">
+          <li className="px-6 ">
             <Link to="/contact">Contact us</Link>
           </li>
-          <li className="px-6 flex">Cart</li>
+          <li className="px-6 ">Cart</li>
           <button
             className="login"
             onClick={() => {
