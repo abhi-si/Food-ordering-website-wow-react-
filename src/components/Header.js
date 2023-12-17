@@ -1,14 +1,16 @@
 import { LOGO_URL } from "../utils/constant";
-import { useState } from "react";
+import { useState ,useContext} from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
-
+import UserContext from "../utils/UserContext";
 
 export const Header = () => {
 
 
   const [BtnName, setBtnName] = useState("Login");
   const onlineStatus = useOnlineStatus();
+  const data = useContext(UserContext);
+  console.log(data);
 
   return (
     //!if device greater then sm use bg color as yellow
