@@ -1,13 +1,14 @@
 import { CDN_URL } from "../utils/constant";
 
 const ItemList = ({ items }) => {
-    console.log(items);
-    return (
+    // console.log(items);
+  return (
+      // <div>category items</div>
       <div>
         {items.map((item) => (
           <div
             key={item.card.info.id}
-            className="p-2 m-2  border-grey-100 border-b-2 text-left flex "
+            className="p-2 m-2  border-gray-200 border-b-2 text-left flex "
           >
             <div className="w-9/12">
               <div className="py-2">
@@ -21,9 +22,9 @@ const ItemList = ({ items }) => {
               </div>
               <p className="text-xs">{item.card.info.description}</p>
             </div>
-            <div className=" img w-3/12 p-4">
+            <div className="  w-3/12 p-4">
               <div className="absolute">
-                <button className="p-2 mx-16 rounded-lg bg-black text-white shadow-lg  ">
+                <button className="p-2 mx-12 my-14 rounded-lg bg-black text-white shadow-lg w-half">
                   Add +
                 </button>
               </div>

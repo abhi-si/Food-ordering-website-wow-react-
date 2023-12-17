@@ -1,4 +1,3 @@
-// import resList from "../utils/mockData";
 import RestaurantCard, {withPromotedLabel } from "./RestaurantCard";
 import { useState ,useEffect} from "react";
 import Shimmer from "./Shimmer";
@@ -9,24 +8,26 @@ const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [whatsOnYourMind, setWhatsOnYourMind] = useState([]);
 
   const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
   //!higher order component
   
-  console.log("body is rendered")
+  // console.log("body is rendered")
   
   useEffect(() => {
     fetchData();
   }, []);
-  // console.log("hellloooooo");
+ 
   const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0759837&lng=72.8776559&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
 
-    console.log(json);
-    console.log("all okkkkkkk!!!!")
+    console.log(
+      json);
+    
     // setListOfRestaurants(json?.data?.cards[2]?.data?.data?.cards);
     // setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
     //! I AM CHANGING THIS BECAUSE SWIGGY API IS UPDATED

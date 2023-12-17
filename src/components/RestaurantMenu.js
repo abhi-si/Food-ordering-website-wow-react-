@@ -11,7 +11,6 @@ const RestaurantMenu = () => {
   const { resId } = useParams();
   //!creating our own custom hook
   const resInfo = useRestaurantMenu(resId);
-
   const [showIndex, setShowIndex] = useState(null);
 
   if (resInfo === null)
@@ -41,7 +40,7 @@ const RestaurantMenu = () => {
       {categories.map((category, index) => (<RestaurantCategory
         //controlled component
         key={category?.card?.card?.title}
-        data={category?.card?.card}
+        data={category?.card?.card} 
         showItems={index === showIndex ? true : false}
         setShowIndex={()=>setShowIndex(index)}
       
