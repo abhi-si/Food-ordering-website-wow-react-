@@ -22,12 +22,16 @@ const RestaurantCard = (props) => {
         // src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/dlt4ml0id5wei4yi840b"
         src={CDN_URL + cloudinaryImageId}
       ></img>
-      <h3 className="font-bold py-2 text-lg">{name}</h3>
-      <h4 className="flex-auto ">{cuisines.join(",")}</h4>
-      <h4>{avgRating}</h4>
-      <h4>{sla.deliveryTime} mins</h4>
+      <h3 className="font-bold py-2 text-lg truncate">{name}</h3>
+      <h4 className="overflow-hidden truncate letter-spacing: -0.3px ">
+        {cuisines.join(",")}
+      </h4>
+      <h4>
+        ★{avgRating} {sla.deliveryTime} mins
+      </h4>
+      {/* <h4> mins</h4> */}
       <h4>{costForTwo}</h4>
-      <h4>{locality }</h4>
+      <h4>{locality}</h4>
     </div>
   );
 };
